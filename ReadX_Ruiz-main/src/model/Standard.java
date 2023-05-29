@@ -199,4 +199,44 @@ public class Standard extends User {
         msg += "\nType A to go to the previous page \nType S to go to the next page \nType B to go to the bibliotec";
         return msg;
     }
+
+    @Override
+    public Genre mostReadGenre() {
+        int maxGenrePages = 0;
+        Genre mostReadGenre = null;
+
+        for (BiblioProducts product : listOfProducts) {
+            if (product instanceof Book) {
+                Book book = (Book) product;
+                Genre genre = book.getGenre();
+                int pages = product.getReadedPages();
+                if (pages > maxGenrePages) {
+                    maxGenrePages = pages;
+                    mostReadGenre = genre;
+                }
+            }
+        }
+
+        return mostReadGenre;
+    }
+
+    @Override
+    public Category mostReadCategory() {
+        int maxPages = 0;
+        Category mostReadCategory = null;
+
+        for (BiblioProducts product : listOfProducts) {
+            if (product instanceof Magazine) {
+                Magazine newMagazine = (Magazine) product;
+                Category category = newMagazine.getCategory();
+                int readedPages = product.getReadedPages();
+                if (readedPages > maxPages) {
+                    maxPages = readedPages;
+                    mostReadCategory = category;
+                }
+            }
+        }
+
+        return mostReadCategory;
+    }
 }

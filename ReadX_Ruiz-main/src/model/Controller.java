@@ -5,6 +5,7 @@ import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Random;
 
+
 /**
  * This class represents a controller for managing biblio products, users, and invoices.
  */
@@ -396,7 +397,6 @@ public class Controller {
                 numberPages = listOfBiblioProducts.get(i).getNumberPages();
             }
         }
-        
         currentPage = updateCurrentPage(option, currentPage, numberPages);
         
         for (int i = 0; i < listOfUser.size(); i++) {
@@ -484,7 +484,110 @@ public class Controller {
 
         return msg;
     }
+    public String secondReport() {
+        String msg = "";
+        for (User user : listOfUser ) {
+            Genre mostReadBookGenre = user.mostReadGenre();
+            Category mostReadMagazineCategory = user.mostReadCategory();
+            int numBook = user.bookAcomulateReadPages();
+            int numMagazine = user.MagazineacomulateReadPages();
+            
+            msg+="\nMost Read Book Genre: " + mostReadBookGenre;
+            msg+="\nNumber of Pages Read of the book: " + numBook;
+            msg+="\nMost Read Magazine Category: " + mostReadMagazineCategory;
+            msg+="\nNumber of Pages Read of the Magazine: " + numMagazine;
+            break;
+        }
+        return msg;
+    }
+    public String thirdReport() {
+        String msg = "";
+        int cont1 = 0;
+        int cont2 = 0;
+        int cont3 = 0;
+        double value1 = 0;
+        double value2 = 0;
+        double value3 = 0;
     
+        for (BiblioProducts product : listOfBiblioProducts) {
+            if (product instanceof Book) {
+                Book book = (Book) product;
+                Genre genre = book.getGenre();
+                double value = book.getValue() * book.getNumSoldBooks();
+    
+                if (genre == Genre.FANTASY) {
+                    cont1++;
+                    value1 += value;
+                } else if (genre == Genre.HISTORICAL_NOVEL) {
+                    cont2++;
+                    value2 += value;
+                } else if (genre == Genre.FICTION_SCIENCE) {
+                    cont3++;
+                    value3 += value;
+                }
+            }
+        }
+    
+        msg += "\nThe number of books sold in the: ";
+        msg += "\nFantasy " + cont1;
+        msg += "\nHistorical Novel " + cont2;
+        msg += "\nScience Fiction " + cont3;
+    
+        msg += "\n\nThe total value: ";
+        msg += "\nFantasy: " + value1;
+        msg += "\nHistorical Novel: " + value2;
+        msg += "\nScience Fiction: " + value3;
+    
+        return msg;
+    }
+    
+    /**
+     * Calculates the number of active subscriptions and their total value by magazine category.
+     *
+     * @return Returns a formatted message containing the number of active subscriptions and their total value by category.
+     */
+    public String fourthReport() {
+        String msg = "";
+        int cont1 = 0;
+        int cont2 = 0;
+        int cont3 = 0;
+        double value1 = 0;
+        double value2 = 0;
+        double value3 = 0;
+    
+        for (BiblioProducts product : listOfBiblioProducts) {
+            if (product instanceof Magazine) {
+                Magazine magazine = (Magazine) product;
+                Category category = magazine.getCategory();
+                double value = magazine.getValue() * magazine.getActiveSubs();
+    
+                if (category == Category.DESIGN) {
+                    cont1++;
+                    value1 += value;
+                } else if (category == Category.SCIENTIST) {
+                    cont2++;
+                    value2 += value;
+                } else if (category == Category.VARIETIES) {
+                    cont3++;
+                    value3 += value;
+                }
+            }
+        }
+    
+        msg += "\nThe number of magazines sold in the: ";
+        msg += "\nDesign " + cont1;
+        msg += "\nScientific " + cont2;
+        msg += "\nVarieties " + cont3;
+    
+        msg += "\n\nThe total value: ";
+        msg += "\nDesign: " + value1;
+        msg += "\nScientific: " + value2;
+        msg += "\nVarieties: " + value3;
+    
+        return msg;
+    }
+    
+
     /**
      * Retrieves the subscribed magazines for a given user.
      *

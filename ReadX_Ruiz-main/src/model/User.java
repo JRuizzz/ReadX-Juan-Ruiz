@@ -193,8 +193,20 @@ public abstract class User implements Buyable {
      * @return a message with information about the reading session
      */
     public abstract String readingSession(String name, int currentPage, int numberPages);
+      /**
+     * This method returns the most read book genre by the user.
+     *
+     * @return The most read book genre.
+     */
+    public abstract Genre mostReadGenre();
 
     /**
+     * This method the most read magazine category by the user.
+     *
+     * @return The most read magazine category.
+     */
+    public abstract Category mostReadCategory();
+     /**
      * Adds an invoice to the user's list of invoices.
      *
      * @param invoice the invoice to add

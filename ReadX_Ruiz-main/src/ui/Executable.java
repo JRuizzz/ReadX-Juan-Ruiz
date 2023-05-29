@@ -113,9 +113,8 @@ public class Executable {
 			case 6:
 			System.out.println("1.Acomulate readed pages for type product(Book or Magazine)");
 			System.out.println("2.Most read Genre of de book and category of the magazine in the platform");
-			System.out.println("3.");
-			System.out.println("4.");
-			System.out.println("5.");
+			System.out.println("3.For each genre, report the number of books sold and the total value of sales");
+			System.out.println("4.For each category, report the number of active subscriptions and the total value paid for subscriptions");
 			int optionRE = lector.nextInt();
 
 			switch(optionRE){
@@ -123,13 +122,13 @@ public class Executable {
 				firstReport();
 				break;
 				case 2:
-
+				secondReport();
 				break;
 				case 3:
-
+				thirdReport();
 				break;
 				case 4:
-
+				fourthReport();
 				break;
 				case 5:
 
@@ -686,6 +685,9 @@ public class Executable {
 				currentPage = controller.updateCurrentPage(option, currentPage, numberPages);
 				System.out.println(controller.readingSession(decisionUser, optionUser, option, currentPage, cont));
 				option = lector.nextLine();
+				if(decisionUser.equalsIgnoreCase("b")){
+					break;
+				}
 			}
 		}
 	}
@@ -694,6 +696,15 @@ public class Executable {
 		System.out.println(controller.firstReport());
 	}
 
+	public void secondReport(){
+		System.out.println(controller.secondReport());
+	}
+	public void thirdReport(){
+		System.out.println(controller.thirdReport());
+	}
+	public void fourthReport(){
+		System.out.println(controller.fourthReport());
+	}
 
 
 }
